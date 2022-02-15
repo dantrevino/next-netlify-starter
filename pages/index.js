@@ -1,8 +1,16 @@
-import Head from 'next/head'
-import Header from '@components/Header'
-import Footer from '@components/Footer'
+import Head from "next/head";
+import Header from "@components/Header";
+import Footer from "@components/Footer";
+import { getUserData, UserData } from "@stacks/connect";
+import { useEffect, useState } from "react";
 
 export default function Home() {
+  const [data, setData] = useState(null);
+
+  useEffect(async () => {
+    setData(await getUserData());
+  });
+
   return (
     <div className="container">
       <Head>
@@ -11,7 +19,7 @@ export default function Home() {
       </Head>
 
       <main>
-        <Header title="Welcome to my app!" />
+        <Header title={`welcome ${data?.username}`} />
         <p className="description">
           Get started by editing <code>pages/index.js</code>
         </p>
@@ -19,5 +27,9 @@ export default function Home() {
 
       <Footer />
     </div>
-  )
+  );
 }
+
+const getUser = async () => {
+  return 
+};
